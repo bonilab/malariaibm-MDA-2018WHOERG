@@ -40,7 +40,7 @@ font = {
         'size'   : fs }
 
 matplotlib.rc('font', **font)
-sns.set(font_scale=0.8)
+sns.set(font_scale=1)
 sns.set_style("whitegrid", {'ytick.left': True })
 
 
@@ -85,7 +85,7 @@ all_data = pd.concat(list_)
 ax1 = sns.boxplot(x="importation", y="t25",hue="mda" , data=all_data,showfliers=False,boxprops={ "zorder":10},ax = ax[0])
 
 # Add transparency to colors
-for patch in ax1.artists:
+for patch in ax1.patches:
     r, g, b, a = patch.get_facecolor()
     patch.set_facecolor((r, g, b,0.2))
 #
@@ -149,7 +149,7 @@ all_data = pd.concat(list_)
 ax1 = sns.boxplot(x="importation", y="t25",hue="mda" , data=all_data,showfliers=False,boxprops={ "zorder":10},ax = ax[1])
 
 # Add transparency to colors
-for patch in ax1.artists:
+for patch in ax1.patches:
     r, g, b, a = patch.get_facecolor()
     patch.set_facecolor((r, g, b,0.2))
 #
