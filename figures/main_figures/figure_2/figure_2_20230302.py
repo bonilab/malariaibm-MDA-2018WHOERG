@@ -77,14 +77,14 @@ for idx, scenario in enumerate(scenarios):
     ax22 = ax[idx,2].twinx()
     
     for i_mda, mda in enumerate(mdas):        
-        data= pd.read_csv('data\ONELOC_40k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL%s_pfpr.csv'%(mda,pfpr,scenario ), sep=',', header=None)
+        data= pd.read_csv('data/ONELOC_40k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL%s_pfpr.csv'%(mda,pfpr,scenario ), sep=',', header=None)
         data = data.quantile([0.05, 0.25, 0.5, 0.75, 0.95], axis=1).T                        
         data.index = dates
         
         ax[idx,0].fill_between(data.index, data[.25], data[.75], alpha=.2)
         ax[idx, 0].plot(data.index, data[.5], linewidth=main_lw)
    
-        data= pd.read_csv('data\ONELOC_40k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL%s_positive.csv'%(mda,pfpr,scenario), sep=',', header=None)
+        data= pd.read_csv('data/ONELOC_40k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL%s_positive.csv'%(mda,pfpr,scenario), sep=',', header=None)
         data = data.fillna(0)
         data = data.quantile([0.05, 0.25, 0.5, 0.75, 0.95], axis=1).T        
         data.index = dates
@@ -106,7 +106,7 @@ for idx, scenario in enumerate(scenarios):
         
         
     
-        data= pd.read_csv('data\ONELOC_40k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL%s_C580Y.csv'%(mda,pfpr,scenario), sep=',', header=None)
+        data= pd.read_csv('data/ONELOC_40k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL%s_C580Y.csv'%(mda,pfpr,scenario), sep=',', header=None)
         data = data.fillna(0)
         data = data.quantile([0.05, 0.25, 0.5, 0.75, 0.95], axis=1).T        
         data.index = dates
@@ -118,7 +118,7 @@ for idx, scenario in enumerate(scenarios):
 #        else:
 #            ax2.plot(data.index, data[.5],'--')
     
-        data= pd.read_csv('data\ONELOC_40k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL%s_plas.csv'%(mda,pfpr,scenario), sep=',', header=None)
+        data= pd.read_csv('data/ONELOC_40k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL%s_plas.csv'%(mda,pfpr,scenario), sep=',', header=None)
         data = data.fillna(0)
         data = data.quantile([0.05, 0.25, 0.5, 0.75, 0.95], axis=1).T
         data.index = dates
@@ -178,7 +178,7 @@ for idx, scenario in enumerate(scenarios):
         ax[idx,0].set_title(r'$PfPR_{2-10}$')
 #        ax[idx,0].set_title('PfPR_2-10')
         ax[idx,1].set_title('ALLELE FREQUENCY OF 580Y')        
-        ax[idx,2].set_title('GENOTYPE FREQUENCY OF\n PIPERAQUINE RESISTANCE')
+        ax[idx,2].set_title('GENOTYPE FREQUENCY OF\nPIPERAQUINE RESISTANTS')
         
     ax[idx,0].set_ylabel(y_labels[idx],linespacing=1.5)
     

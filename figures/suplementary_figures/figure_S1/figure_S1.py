@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 import matplotlib
 
 fs = 12
-font = {'family' : 'normal',
+font = {
         'weight' : 'normal',
         'size'   : fs }
 
@@ -46,13 +46,13 @@ dates = pd.date_range(start= "1 1 2008", end= "1 1 2042", freq="MS")
 
 import matplotlib.ticker as ticker
 
-main_lw = 1.5
-sub_lw = 0.8
+main_lw = 2.5
+sub_lw = 1.2
 
 infected_plot_color = '#b1b1b1'
 palette = sns.color_palette()[0:5]
 
-sns.set( font_scale=2.2)
+sns.set( font_scale=3)
 sns.set_style("whitegrid", {'ytick.left': True })
 matplotlib.rc('font', **font)
 matplotlib.rc('text', usetex = False)
@@ -63,7 +63,7 @@ plt.close('all')
 
 dpi=72
 fig_w = 3240/dpi
-fig_h = fig_w*3/4
+fig_h = fig_w*10/16
 
 plt.close('all')
 fig, ax = plt.subplots(4,3, figsize=(fig_w, fig_h),tight_layout=True)  
@@ -77,14 +77,14 @@ for idx, scenario in enumerate(scenarios):
     ax22 = ax[idx,2].twinx()
     
     for i_mda, mda in enumerate(mdas):        
-        data= pd.read_csv('data\ONELOC_300k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL%s_pfpr.csv'%(mda,pfpr,scenario ), sep=',', header=None)
+        data= pd.read_csv('data/ONELOC_300k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL%s_pfpr.csv'%(mda,pfpr,scenario ), sep=',', header=None)
         data = data.quantile([0.05, 0.25, 0.5, 0.75, 0.95], axis=1).T                        
         data.index = dates
         
         ax[idx,0].fill_between(data.index, data[.25], data[.75], alpha=.2)
         ax[idx, 0].plot(data.index, data[.5], linewidth=main_lw)
    
-        data= pd.read_csv('data\ONELOC_300k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL%s_positive.csv'%(mda,pfpr,scenario), sep=',', header=None)
+        data= pd.read_csv('data/ONELOC_300k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL%s_positive.csv'%(mda,pfpr,scenario), sep=',', header=None)
         data = data.fillna(0)
         data = data.quantile([0.05, 0.25, 0.5, 0.75, 0.95], axis=1).T        
         data.index = dates
@@ -106,7 +106,7 @@ for idx, scenario in enumerate(scenarios):
         
         
     
-        data= pd.read_csv('data\ONELOC_300k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL%s_C580Y.csv'%(mda,pfpr,scenario), sep=',', header=None)
+        data= pd.read_csv('data/ONELOC_300k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL%s_C580Y.csv'%(mda,pfpr,scenario), sep=',', header=None)
         data = data.fillna(0)
         data = data.quantile([0.05, 0.25, 0.5, 0.75, 0.95], axis=1).T        
         data.index = dates
@@ -118,7 +118,7 @@ for idx, scenario in enumerate(scenarios):
 #        else:
 #            ax2.plot(data.index, data[.5],'--')
     
-        data= pd.read_csv('data\ONELOC_300k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL%s_plas.csv'%(mda,pfpr,scenario), sep=',', header=None)
+        data= pd.read_csv('data/ONELOC_300k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL%s_plas.csv'%(mda,pfpr,scenario), sep=',', header=None)
         data = data.fillna(0)
         data = data.quantile([0.05, 0.25, 0.5, 0.75, 0.95], axis=1).T
         data.index = dates
@@ -182,7 +182,7 @@ for idx, scenario in enumerate(scenarios):
         ax[idx,0].set_title(r'$PfPR_{2-10}$')
 #        ax[idx,0].set_title('PfPR_2-10')
         ax[idx,1].set_title('ALLELE FREQUENCY OF 580Y')        
-        ax[idx,2].set_title('GENOTYPE FREQUENCY OF\n DOUBLE-COPY PLASMEPSIN')
+        ax[idx,2].set_title('GENOTYPE FREQUENCY OF\n PIPERAQUINE RESISTANTS')
         
     ax[idx,0].set_ylabel(y_labels[idx],linespacing=1.5 )
     
@@ -205,9 +205,9 @@ for idx, scenario in enumerate(scenarios):
     ax[idx,1].set_xticks(dr)
     ax[idx,2].set_xticks(dr)
     if(idx==3):
-        ax[idx,0].set_xticklabels(range(2022,2041,5))
-        ax[idx,1].set_xticklabels(range(2022,2041,5))
-        ax[idx,2].set_xticklabels(range(2022,2041,5))
+        ax[idx,0].set_xticklabels(range(0,19,5))
+        ax[idx,1].set_xticklabels(range(0,19,5))
+        ax[idx,2].set_xticklabels(range(0,19,5))
         
     # remove ytick label 0 for PFPR plot
     ytick_labels =  [item.get_text() for item in ax[idx,0].get_yticklabels()]
@@ -231,7 +231,7 @@ axx.get_xaxis().set_visible(False)
 axx.get_yaxis().set_ticks([])
 
 plt.grid(False)
-axx.set_ylabel('NUMBER OF POSITIVE INIDIVIDUALS\nANY LEVEL OF PARASITEAMIA',labelpad=110, 
+axx.set_ylabel('NUMBER OF POSITIVE INIDIVIDUALS\nANY LEVEL OF PARASITEAMIA',labelpad=160, 
                color=infected_plot_color,linespacing=1.5)
 axx.yaxis.set_label_position("right")
 
