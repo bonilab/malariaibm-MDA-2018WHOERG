@@ -41,9 +41,7 @@ If you use or refer to the results, code, or data from this repository in your
 research or work, please cite the original publication:
 
 ```text
-Nguyen, T.D., Gao, B., Amaratunga, C. et al. Preventing antimalarial drug
-resistance with triple artemisinin-based combination therapies. Nat Commun 14,
-4568 (2023). https://doi.org/10.1038/s41467-023-39914-3
+Nguyen TD, Tran TNA, Parker DM, White NJ, Boni MF (2023) Antimalarial mass drug administration in large populations and the evolution of drug resistance. PLOS Global Public Health 3(7): e0002200. https://doi.org/10.1371/journal.pgph.0002200
 ```
 
 For questions or inquiries, please contact the corresponding author or create
