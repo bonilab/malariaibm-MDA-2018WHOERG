@@ -1,6 +1,6 @@
 # Antimalarial Drug Resistance Simulation
 
-This repository contains the figuers output and source code for an individual-based
+This repository contains the figures output and source code for an individual-based
 simulation that was a part of the scientific publication titled "Antimalarial
 mass drug administration in large populations and the evolution of drug
 resistance" published in PLOS Global Public Health in July 2023. This work was
