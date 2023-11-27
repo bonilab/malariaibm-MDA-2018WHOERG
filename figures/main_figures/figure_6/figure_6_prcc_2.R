@@ -8,7 +8,7 @@ for (mda in 0:4) {
   
   paramspace$mda = mda
   paramspace = head(paramspace, 10000)
-  output = read.csv(sprintf('%d\\data\\time_580Y_reach_x.csv',mda), header = FALSE)
+  output = read.csv(sprintf('%d//data//time_580Y_reach_x.csv',mda), header = FALSE)
   
   temp = cbind(paramspace, output['V5']
   )
@@ -54,7 +54,7 @@ x<-barplot(prcc_res$est,
            xlab = expression('Partial Rank Correlation Coefficient with T'[.25])
 )
 
-tx_offset = 0.045
+tx_offset = 0.06
 prcc_res$x_pos = with(prcc_res, ifelse(est < 0, est - tx_offset, est + tx_offset))
 text(prcc_res$x_pos, x , sprintf("%.2f",prcc_res$est) ,cex=1)
 axis(3)

@@ -8,7 +8,7 @@ for (mda in 0:4) {
   # 
   # paramspace$mda = mda
   # paramspace = head(paramspace, 10000)
-  output = read.csv(sprintf('%d\\data\\bottle_neck_data.csv',mda), header = FALSE)
+  output = read.csv(sprintf('%d/data/bottle_neck_data.csv',mda), header = FALSE)
   
   # temp = cbind(paramspace, output['V6'])
   result = rbind(result, output)

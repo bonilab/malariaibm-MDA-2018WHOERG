@@ -9,17 +9,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import matplotlib
 
-fs = 22
-font = {
-        'weight' : 'normal',
-        'size'   : fs }
-
-matplotlib.rc('font', **font)
-
-sns.set(style="whitegrid")
-palette = sns.color_palette()[0:5]
-sns.set(font_scale=1.5)
-
 # dates = pd.date_range(start= "1 1 2006", end= "1 1 2040", freq="MS")
 
 t = pd.read_csv('monthly_data_0.txt',delimiter='\t',header=None)[0]
@@ -42,8 +31,7 @@ font = {
 matplotlib.rc('font', **font)
 sns.set(font_scale=1)
 sns.set_style("whitegrid", {'ytick.left': True })
-
-
+palette = sns.color_palette("muted")[0:5]
 
 plt.close('all')
 fig, ax = plt.subplots( 2, 1,figsize=(12, 8), dpi=150,tight_layout=True) 
@@ -60,7 +48,7 @@ threshold = 0.25
 for pfpr in pfprs:
     for importation_i, importation in enumerate(importations):
         for mda in mdas:
-            data= pd.read_csv('data\ONELOC_40k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL_importation_%s_C580Y.csv'%(mda,pfpr,importations_value[importation_i]), sep=',', header=None)
+            data= pd.read_csv('data/ONELOC_40k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL_importation_%s_C580Y.csv'%(mda,pfpr,importations_value[importation_i]), sep=',', header=None)
             data = data.fillna(0)
             time_t=[]
             for i in range(100):
@@ -94,7 +82,10 @@ for patch in ax1.patches:
 #for artist in ax.findobj(PathCollection):
 #    artist.set_zorder(11)
 
-ax2= sns.stripplot(x="importation", y="t25", hue="mda", data=all_data, jitter=True, dodge= True, size=3, alpha=0.75,ax = ax[0])
+ax2= sns.stripplot(x="importation", y="t25", hue="mda", data=all_data, 
+                   jitter=True, dodge= True, size=3, alpha=0.75,
+                   palette=sns.color_palette("muted"),
+                   ax = ax[0])
 for artist in ax2.findobj(PathCollection):
     artist.set_zorder(1)
 
@@ -125,7 +116,7 @@ list_ = []
 for pfpr in pfprs:
     for importation_i, importation in enumerate(importations):
         for mda in mdas:
-            data= pd.read_csv('data\ONELOC_300k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL_importation_%s_C580Y.csv'%(mda,pfpr,importations_value[importation_i]), sep=',', header=None)
+            data= pd.read_csv('data/ONELOC_300k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL_importation_%s_C580Y.csv'%(mda,pfpr,importations_value[importation_i]), sep=',', header=None)
             data = data.fillna(0)
             time_t=[]
             for i in range(100):
@@ -158,7 +149,10 @@ for patch in ax1.patches:
 #for artist in ax.findobj(PathCollection):
 #    artist.set_zorder(11)
 
-ax2= sns.stripplot(x="importation", y="t25", hue="mda", data=all_data, jitter=True, dodge= True, size=3, alpha=0.75,ax = ax[1])
+ax2= sns.stripplot(x="importation", y="t25", hue="mda", data=all_data, 
+                   jitter=True, dodge= True, size=3, alpha=0.75,
+                   palette=sns.color_palette("muted"),
+                   ax = ax[1])
 for artist in ax2.findobj(PathCollection):
     artist.set_zorder(1)
 
@@ -180,3 +174,5 @@ ax1.legend(custom_lines, ['0', '1', '2','3','4'], title="# MDA ROUNDS", loc="low
 ax1.set_ylabel('300K\n'+'YEARS UNTIL\n25% ARTEMISININ RESISTANCE', linespacing=1.5)
 
 ax1.set_xlabel('IMPORTATION RATE (CASES PER DAY)')
+
+plt.savefig('figure_4_20230601.tiff', format='tiff')

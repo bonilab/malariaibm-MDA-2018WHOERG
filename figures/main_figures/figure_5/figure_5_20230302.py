@@ -15,12 +15,6 @@ fs = 10
 font = {'weight' : 'normal',
         'size'   : fs }
 
-matplotlib.rc('font', **font)
-#matplotlib.rcParams['axes.unicode_minus'] = False
-sns.set(font_scale=0.8)
-sns.set_style("whitegrid", {'ytick.left': True })
-
-palette = sns.color_palette()[0:5]
 
 #%%
 #plot 40k
@@ -33,6 +27,9 @@ sns.set_style("whitegrid", {'ytick.left': True })
 matplotlib.rc('font', **font)
 matplotlib.rc('text', usetex = False)
 plt.rc('text', usetex=False)
+
+sns.set_palette(sns.color_palette("muted"))
+palette = sns.color_palette("muted")[0:5]
 
 dpi=72
 fig_w = 3240/dpi
@@ -55,13 +52,14 @@ for pfpr in pfprs:
     for itc_i, itc in enumerate(itcs):
         for mda in mdas:
             if(itc_i ==0):
-                data_raw= pd.read_csv('data\ONELOC_40k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL_pfpr.csv'%(mda,pfpr), sep=',', header=None)    
-                data_positive= pd.read_csv('data\ONELOC_40k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL_positive.csv'%(mda,pfpr), sep=',', header=None)    
+                data_raw= pd.read_csv('data/ONELOC_40k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL_pfpr.csv'%(mda,pfpr), sep=',', header=None)    
+                data_positive= pd.read_csv('data/ONELOC_40k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL_positive.csv'%(mda,pfpr), sep=',', header=None)    
             else:
-                data_raw= pd.read_csv('data\ONELOC_40k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL_itc_%s_pfpr.csv'%(mda,pfpr,itcs_value[itc_i]), sep=',', header=None)
-                data_positive= pd.read_csv('data\ONELOC_40k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL_itc_%s_positive.csv'%(mda,pfpr,itcs_value[itc_i]), sep=',', header=None)    
+                data_raw= pd.read_csv('data/ONELOC_40k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL_itc_%s_pfpr.csv'%(mda,pfpr,itcs_value[itc_i]), sep=',', header=None)
+                data_positive= pd.read_csv('data/ONELOC_40k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL_itc_%s_positive.csv'%(mda,pfpr,itcs_value[itc_i]), sep=',', header=None)    
 
             data = pd.DataFrame()
+            data.fillna(0)
             data['pfpr2025']=data_raw.iloc[229,:]            
             data['positive']=data_positive.T.iloc[229,:]
             data['mda'] = mda
@@ -69,7 +67,8 @@ for pfpr in pfprs:
             list_.append(data)
 
 all_pfpr2025 = pd.concat(list_)
-all_pfpr2025['log_pfpr2025'] = np.log10(all_pfpr2025['pfpr2025']+0.0001);
+all_pfpr2025['pfpr2025'] = all_pfpr2025['pfpr2025']+0.0001
+all_pfpr2025['log_pfpr2025'] = np.log10(all_pfpr2025['pfpr2025']);
 
 
 
@@ -93,7 +92,9 @@ ax1.set_ylim([0.0005, 1.0])
 
 ax2=sns.stripplot(x="itc", y="pfpr2025", hue="mda", 
                   data=all_pfpr2025, jitter=True, dodge= True, 
-                  size=dot_size, alpha=0.75, ax = ax[0])
+                  size=dot_size, alpha=0.75, ax = ax[0],
+                  palette=sns.color_palette("muted")[0:5]
+                  )
 for artist in ax2.findobj(PathCollection):
     artist.set_zorder(1)
 
@@ -145,11 +146,11 @@ for pfpr in pfprs:
     for itc_i, itc in enumerate(itcs):
         for mda in mdas:
             if(itc_i ==0):
-                data_raw= pd.read_csv('data\ONELOC_300k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL_pfpr.csv'%(mda,pfpr), sep=',', header=None)    
-                data_positive= pd.read_csv('data\ONELOC_300k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL_positive.csv'%(mda,pfpr), sep=',', header=None)    
+                data_raw= pd.read_csv('data/ONELOC_300k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL_pfpr.csv'%(mda,pfpr), sep=',', header=None)    
+                data_positive= pd.read_csv('data/ONELOC_300k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL_positive.csv'%(mda,pfpr), sep=',', header=None)    
             else:
-                data_raw= pd.read_csv('data\ONELOC_300k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL_itc_%s_pfpr.csv'%(mda,pfpr,itcs_value[itc_i]), sep=',', header=None)
-                data_positive= pd.read_csv('data\ONELOC_300k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL_itc_%s_positive.csv'%(mda,pfpr,itcs_value[itc_i]), sep=',', header=None)    
+                data_raw= pd.read_csv('data/ONELOC_300k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL_itc_%s_pfpr.csv'%(mda,pfpr,itcs_value[itc_i]), sep=',', header=None)
+                data_positive= pd.read_csv('data/ONELOC_300k_%dRMDA_PFPR%d_OPPUNIFORM_FLAL_itc_%s_positive.csv'%(mda,pfpr,itcs_value[itc_i]), sep=',', header=None)    
 
             data = pd.DataFrame()
             data['pfpr2025']=data_raw.iloc[229,:]      
@@ -160,7 +161,8 @@ for pfpr in pfprs:
             list_.append(data)
 
 all_pfpr2025 = pd.concat(list_)
-all_pfpr2025['log_pfpr2025'] = np.log10(all_pfpr2025['pfpr2025']+0.0001);
+all_pfpr2025['pfpr2025'] = all_pfpr2025['pfpr2025'] + 0.0001
+all_pfpr2025['log_pfpr2025'] = np.log10(all_pfpr2025['pfpr2025']);
 
 #sns.violinplot(x="itc", y="log_pfpr2025",hue="mda" , data=all_pfpr2025, palette="muted",inner=None, ax=ax[0])
 ax1 = sns.boxplot(x="itc", y="pfpr2025",hue="mda" , data=all_pfpr2025,showfliers=False,boxprops={ "zorder":10}, whis=0,ax = ax[1])
@@ -176,7 +178,10 @@ ax1.yaxis.set_major_formatter(ticker.StrMethodFormatter("{x:0.3f}%"))
 ax1.yaxis.set_minor_formatter(ticker.NullFormatter())
 ax1.set_ylim([0.0005, 1.0])
 
-ax2=sns.stripplot(x="itc", y="pfpr2025", hue="mda", data=all_pfpr2025, jitter=True, dodge= True, size=dot_size, alpha=0.75, ax = ax[1])
+ax2=sns.stripplot(x="itc", y="pfpr2025", hue="mda", data=all_pfpr2025, 
+                  jitter=True, dodge= True, size=dot_size, alpha=0.75, 
+                  palette=sns.color_palette("muted")[0:5],
+                  ax = ax[1])
 for artist in ax2.findobj(PathCollection):
     artist.set_zorder(1)
     
@@ -222,5 +227,5 @@ for tick in range(len(ax1.get_xticklabels())):
                      count_cases_lt_100_300k.iloc[tick*5+ind][0] , horizontalalignment='center',  
                      color='k', fontsize=annotation_text_size)
 
-
+plt.savefig('figure_5_20230601.tiff', format='tiff')
 
