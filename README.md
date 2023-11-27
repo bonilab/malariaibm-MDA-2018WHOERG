@@ -13,8 +13,9 @@ DOI: 10.1038/s41467-023-39914-3
 
 ## Repository Structure
 
-figures: Contains the figures generated from the simulation output.
-source_code/: Contains the source code for the individual-based simulation.
+`figures`: Contains the figures generated from the simulation output.
+
+`source_code`: Contains the source code for the individual-based simulation.
 
 ## How to Use
 
