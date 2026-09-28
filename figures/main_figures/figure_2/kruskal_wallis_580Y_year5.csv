@@ -1,0 +1,5 @@
+figure,comparison,output_row,H_tie_corrected,p_value_chi_square_df4,log10_p_value
+Figure 2,B (no resistance import),228,4605.543737245725,1.911278e-997,-996.7186761541492
+Figure 2,E (resistance import),228,922.1501854974122,2.644503e-198,-197.57765596443542
+Figure 3,B (no resistance import),228,249.50194447122314,8.333981e-53,-52.07914750253088
+Figure 3,E (resistance import),228,1069.3885062459503,3.267032e-230,-229.48584664936075

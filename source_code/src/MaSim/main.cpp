@@ -143,6 +143,7 @@ void handle_cli(Model *model, int argc, char **argv) {
   args::ValueFlag<int> cluster_job_number(commands, "int", "Cluster job number. \nEx: MaSim -j 1", {'j'});
   args::ValueFlag<std::string> reporter(commands, "string", "Reporter Type. \nEx: MaSim -r mmc", {'r'});
   args::ValueFlag<std::string> input_path(commands, "string", "Path for output files, default is current directory. \nEx: MaSim -p out", {'o'});
+  args::ValueFlag<unsigned long> initial_seed(commands, "unsigned long", "Initial random seed (0 uses the time-based seed; default 0). \nEx: MaSim --seed 12345", {'s', "seed"});
   
   // Allow the --v=[int] flag to be processed by START_EASYLOGGINGPP
   args::Group arguments(parser, "verbosity", args::Group::Validators::DontCare, args::Options::Global);
@@ -171,6 +172,9 @@ void handle_cli(Model *model, int argc, char **argv) {
     exit(EXIT_FAILURE);
   }
   model->set_config_filename(input);
+  if (initial_seed) {
+    model->set_initial_seed_number(args::get(initial_seed));
+  }
   
   // Set the remaining values if given
   path = input_path ? args::get(input_path) : path;
